@@ -33,7 +33,7 @@ namespace PacketSender
             var dataStore = new CDataStore(IntPtr.Add(m.Process.MainModule.BaseAddress, vTable), (IntPtr)pPacket, bytes.Length);
             var pDataStore = m.Allocate<CDataStore>(dataStore);
 
-            m.Call((uint)(IntPtr.Add(m.Process.MainModule.BaseAddress, send2)),
+            m.Call(IntPtr.Add(m.Process.MainModule.BaseAddress, send2),
                 CallingConventionEx.StdCall,
                 pDataStore);
 

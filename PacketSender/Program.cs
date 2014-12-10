@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Threading;
 using WhiteMagic;
 
@@ -8,10 +9,14 @@ namespace PacketSender
     {
         static void Main(string[] args)
         {
-            var proc = Helpers.FindProcessByInternalName("world of warcraft");
-            if (proc == null)
+            Process proc;
+            try
             {
-                Console.WriteLine("Can't find process");
+                proc = MagicHelpers.SelectProcess("world of warcraft");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Can't find process: \"{0}\"", e.Message);
                 return;
             }
 
@@ -26,7 +31,7 @@ namespace PacketSender
                         packet.WriteInt32(i);
                         packet.WritePackedUInt128(0, 0);
 
-                        using (var suspender = m.Suspend())
+                        using (var suspender = m.MakeSuspender())
                         {
                             sender.Send(packet);
                         }
