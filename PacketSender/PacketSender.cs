@@ -17,8 +17,11 @@ namespace PacketSender
         //private static int vTable = 0xD62168 - 0x400000;
         //private static int send2 = 0x4069BD - 0x400000;
         // 19243
-        private static int vTable = 0xD62178 - 0x400000;
-        private static int send2 = 0x4069B1 - 0x400000;
+        //private static int vTable = 0xD62178 - 0x400000;
+        //private static int send2 = 0x4069B1 - 0x400000;
+        // 20994
+        private const int vTable = 0xEC1EC0 - 0x400000;
+        private const int send2 = 0x4A2C07 - 0x400000;
 
         public PacketSender(MemoryHandler m)
         {
@@ -30,11 +33,11 @@ namespace PacketSender
             var bytes = packet.ToArray();
             var pPacket = m.AllocateBytes(bytes);
 
-            var dataStore = new CDataStore(IntPtr.Add(m.Process.MainModule.BaseAddress, vTable), (IntPtr)pPacket, bytes.Length);
+            var dataStore = new CDataStore(m.Process.MainModule.BaseAddress.Add(vTable), pPacket, bytes.Length);
             var pDataStore = m.Allocate<CDataStore>(dataStore);
 
-            m.Call(IntPtr.Add(m.Process.MainModule.BaseAddress, send2),
-                CallingConventionEx.StdCall,
+            m.Call(m.Process.MainModule.BaseAddress.Add(send2),
+                MagicConvention.StdCall,
                 pDataStore);
 
             m.FreeMemory(pDataStore);
