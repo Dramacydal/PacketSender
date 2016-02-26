@@ -20,8 +20,11 @@ namespace PacketSender
         //private static int vTable = 0xD62178 - 0x400000;
         //private static int send2 = 0x4069B1 - 0x400000;
         // 20994
-        private const int vTable = 0xEC1EC0 - 0x400000;
-        private const int send2 = 0x4A2C07 - 0x400000;
+        //private const int vTable = 0xEC1EC0 - 0x400000;
+        //private const int send2 = 0x4A2C07 - 0x400000;
+        // 21021
+        private const int vTable = 0xEC1EB0 - 0x400000;
+        private const int send2 = 0x4A2B92 - 0x400000;
 
         public PacketSender(MemoryHandler m)
         {

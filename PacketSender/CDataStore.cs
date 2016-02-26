@@ -18,9 +18,9 @@ namespace PacketSender
             this.vTable = vTable;
             this.Buffer = buffer;
             this.mBase = 0;
-            this.alloc = -1;
+            this.alloc = 256;
             this.size = size;
-            this.read = 0;
+            this.read = 4;
         }
     }
 }

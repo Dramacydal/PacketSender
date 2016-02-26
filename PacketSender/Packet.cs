@@ -3,16 +3,18 @@ namespace PacketSender
 {
     public class Packet : PacketStream
     {
-        public Packet(uint opcode)
+        public Packet(ushort opcode)
             : base()
         {
-            WriteUInt32(opcode);
+            WriteInt32(0);
+            WriteUInt16(opcode);
         }
 
         public Packet(Opcodes opcode)
             : base()
         {
-            WriteUInt32((uint)opcode);
+            WriteInt32(0);
+            WriteUInt16((ushort)opcode);
         }
     }
 }

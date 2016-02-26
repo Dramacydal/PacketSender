@@ -24,7 +24,15 @@ namespace PacketSender
             {
                 var sender = new PacketSender(m);
 
-                for (var i = 0; i < 50000; ++i)
+                using (var packet = new Packet(Opcodes.CMSG_LOGOUT_REQUEST))
+                {
+                    using (var suspender = m.MakeSuspender())
+                    {
+                        sender.Send(packet);
+                    }
+                }
+
+                /*for (var i = 0; i < 50000; ++i)
                 {
                     using (var packet = new Packet(Opcodes.CMSG_QUEST_QUERY))
                     {
@@ -38,10 +46,10 @@ namespace PacketSender
                     }
 
                     Thread.Sleep(50);
-                }
+                }*/
             }
 
-            Console.ReadKey();
+            //Console.ReadKey();
         }
     }
 }

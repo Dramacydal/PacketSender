@@ -1,8 +1,8 @@
 ﻿
 namespace PacketSender
 {
-    public enum Opcodes : uint
+    public enum Opcodes : ushort
     {
-        CMSG_QUEST_QUERY = 0x09A6,
+        CMSG_LOGOUT_REQUEST = 0x34C5,
     }
 }
