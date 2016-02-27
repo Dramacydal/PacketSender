@@ -100,6 +100,8 @@ namespace PacketSender
             var loMask = GetPackedUInt64Mask(loPart);
             var hiMask = GetPackedUInt64Mask(hiPart);
 
+            WriteUInt8(loMask);
+            WriteUInt8(hiMask);
             WritePackedUInt64(loPart, loMask);
             WritePackedUInt64(hiPart, hiMask);
         }
